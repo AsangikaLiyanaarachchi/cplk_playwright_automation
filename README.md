@@ -122,6 +122,72 @@ npx playwright test --headed
 npx playwright show-report
 ```
 
+# Bugs / Issues Identified
+
+## BUG-01 — Mandatory Listing Fields Are Not Validated When Resuming a Draft
+
+**Severity:** High
+
+**Title:** Mandatory listing fields (Floor Area, Price, Title, Description) are not validated when resuming a draft listing at the Review step.
+
+### Description
+
+When a partially completed property listing is saved as a draft and later resumed from **All Properties**, the listing can skip the **Details** and **Finalize** steps and resume directly at the **Review** step.
+
+At the Review step, only the Property Images validation is performed. Mandatory fields such as **Floor Area, Price, Title, and Description** are not validated before proceeding to payment.
+
+### Steps to Reproduce
+
+1. Start creating a new property listing.
+2. Fill in only the **Type & Location** step, then leave/exit the flow.
+
+   * The partial listing is automatically saved and appears under **All Properties**.
+3. Open the saved listing again from **All Properties**.
+
+   * The listing resumes directly at the **Review** step, skipping **Details** and **Finalize**.
+4. Click **Proceed to Payment**.
+
+   * The action is blocked with an **"images required"** error only.
+5. Upload the minimum 3 required images.
+6. Click **Proceed to Payment** again.
+
+   * The listing successfully proceeds to the **Payment Method** step.
+
+### Expected Result
+
+The mandatory fields **Floor Area, Price, Title, and Description** should remain validated when a draft listing is resumed.
+
+The **Proceed to Payment** action should be blocked until all mandatory fields across every listing step have been completed, regardless of whether the user:
+
+* Completes the listing through the normal wizard flow, or
+* Resumes a previously saved draft.
+
+### Actual Result
+
+Only the **Property Images** requirement is validated at the Review step.
+
+The following mandatory fields can remain empty:
+
+* Floor Area
+* Price
+* Title
+* Description
+
+After the minimum required images are uploaded, the listing is allowed to proceed to the Payment Method step despite these mandatory fields being incomplete.
+
+### Impact
+
+An incomplete property listing can reach the payment stage without essential property information such as size, price, title, and description.
+
+This could potentially result in:
+
+* Invalid or incomplete listings being paid for.
+* Incomplete properties being published.
+* Refund or payment-related support issues.
+* Poor user experience for property owners.
+
+
+
 
 
 
