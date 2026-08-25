@@ -138,7 +138,7 @@ test.describe("Module 01 - Sign up as a Property Owner", () => {
     });
   });
 
-  //CPLK_M1_TC_10: Successful signup redirects to correct dashboard
+  //CPLK_M1_TC_08: Successful signup redirects to correct dashboard
   test("CPLK_M1_TC_10: Successful signup redirects to correct dashboard", async ({
     page,
   }) => {
@@ -166,7 +166,7 @@ test.describe("Module 01 - Sign up as a Property Owner", () => {
     });
   });
 
-  //CPLK_M1_TC_11: Re-signup with an already registered account
+  //CPLK_M1_TC_09: Re-signup with an already registered account
   test("CPLK_M1_TC_11: Re-signup with an already registered account", async ({
     page,
   }) => {
